@@ -59,7 +59,7 @@ void startSearching(std::filesystem::path path, std::string filename)
 	subdirectories.push_back(rootDir);
 	std::vector<std::thread> threads;
 
-	for (int i = 0; i < MAX_THREADS; ++i) {
+	for (int i = 0; i < MAX_THREADS; i++) {
 		threads.emplace_back(searchFile, targetFilename);
 	}
 
@@ -72,7 +72,7 @@ void startSearching(std::filesystem::path path, std::string filename)
 	{
 		if (fileFound)
 		{
-			std::cout << "File was found at: " << fileFoundDir << std::endl;
+			std::cout << "File was found at: " << std::filesystem::path(fileFoundDir) << std::endl;
 			break;
 		}
 		if (fileNotExist)
