@@ -1,21 +1,15 @@
 all: myProgram
 
 myProgram: main.o libfilesearcher.a
-	g++ -static main.o -o main -L. -lfilesearcher
+	g++ -static main.cpp -L. ./build/lib/libfilesearcher.a -o  ./build/main.exe
 
 main.o: main.cpp
-	gcc -O -c main.cpp
+	gcc -o .\build\main.o  -c main.cpp
 
 FileSearcher.o: FileSearcher.cpp FileSearcher.h
-	gcc -O -c FileSearcher.cpp
+	gcc -o ./build/lib/FileSearcher.o  -c FileSearcher.cpp
 
 libfilesearcher.a: FileSearcher.o
-	ar rcs libfilesearcher.a FileSearcher.o 
+	ar rcs ./build/lib/libfilesearcher.a ./build/lib/FileSearcher.o 
 
-libs: libfilesearcher.a
-
-clean:
-	del libfilesearcher.a
-	del -f main.o
-	del -f FileSearcher.o
-	del -f main.exe
+libs: ./build/lib/libfilesearcher.a
